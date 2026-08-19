@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALL PROMPTS FEED</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a0a;
+      --surface:   #141414;
+      --border:    #222222;
+      --text:      #e8e8e8;
+      --muted:     #888888;
+      --accent-r:  #ff3c2f;
+      --accent-c:  #00d4ff;
+      --accent-y:  #f5c400;
+      --accent-g:  #22c55e;
+      --accent-o:  #f97316;
+      --headline-font: 'Impact', 'Arial Black', sans-serif;
+      --body-font:     'Inter', 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body-font);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Top Bar ── */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #0a0a0aee;
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 56px;
+    }
+
+    .top-bar .logo {
+      font-family: var(--headline-font);
+      font-size: 20px;
+      letter-spacing: 0.06em;
+      color: var(--accent-r);
+    }
+
+    .top-bar .top-cta {
+      display: none;
+    }
+
+    @media (max-width: 900px) {
+      .top-bar .top-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--accent-r);
+        color: #fff;
+        font-family: var(--headline-font);
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        padding: 7px 16px;
+        border-radius: 4px;
+      }
+    }
+
+    /* ── Layout ── */
+    .layout {
+      display: grid;
+      grid-template-columns: 240px 1fr 220px;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar-left, .sidebar-right { display: none; }
+    }
+
+    /* ── Left Sidebar ── */
+    .sidebar-left {
+      position: sticky;
+      top: 72px;
+    }
+
+    .sidebar-left .brand {
+      margin-bottom: 28px;
+    }
+
+    .sidebar-left .brand-name {
+      font-family: var(--headline-font);
+      font-size: 26px;
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+      color: #fff;
+    }
+
+    .sidebar-left .brand-name span {
+      color: var(--accent-r);
+    }
+
+    .sidebar-left .brand-sub {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .nav-links {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .nav-links li {
+      margin-bottom: 2px;
+    }
+
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    .nav-links a .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .join-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--accent-r);
+      color: #fff;
+      font-family: var(--headline-font);
+      font-size: 15px;
+      letter-spacing: 0.1em;
+      padding: 13px 20px;
+      border-radius: 6px;
+      width: 100%;
+      transition: opacity 0.15s;
+    }
+
+    .join-btn:hover { opacity: 0.88; }
+
+    /* ── Feed Column ── */
+    .feed-column {}
+
+    .feed-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .feed-header h2 {
+      font-family: var(--headline-font);
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── Post Card ── */
+    .post-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-bottom: 16px;
+      transition: border-color 0.15s;
+    }
+
+    .post-card:hover {
+      border-color: #333;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    /* ── Type Badge ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+
+    .badge-NEW-DROP    { background: rgba(0, 212, 255, 0.12); color: var(--accent-c); border: 1px solid rgba(0, 212, 255, 0.25); }
+    .badge-WEEKLY-BLOG { background: rgba(245, 196, 0, 0.12); color: var(--accent-y); border: 1px solid rgba(245, 196, 0, 0.25); }
+    .badge-CREATOR-WIN { background: rgba(34, 197, 94, 0.12); color: var(--accent-g); border: 1px solid rgba(34, 197, 94, 0.25); }
+    .badge-CHALLENGE   { background: rgba(249, 115, 22, 0.12); color: var(--accent-o); border: 1px solid rgba(249, 115, 22, 0.25); }
+
+    .timestamp {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .post-headline {
+      font-family: var(--headline-font);
+      font-size: 22px;
+      letter-spacing: 0.03em;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .post-body {
+      font-size: 14px;
+      color: #aaa;
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    .get-it-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-r);
+      color: #fff;
+      font-family: var(--headline-font);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: opacity 0.15s;
+    }
+
+    .get-it-btn:hover { opacity: 0.88; }
+
+    /* ── Loading / Error States ── */
+    .feed-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+
+    .feed-state .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent-r);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      margin: 0 auto 16px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .feed-state p {
+      font-size: 14px;
+    }
+
+    /* ── Right Sidebar ── */
+    .sidebar-right {
+      position: sticky;
+      top: 72px;
+    }
+
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .about-card h3 {
+      font-family: var(--headline-font);
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-r);
+      margin-bottom: 10px;
+    }
+
+    .about-card p {
+      font-size: 13px;
+      color: #999;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .about-join-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-r);
+      color: #fff;
+      font-family: var(--headline-font);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      padding: 10px;
+      border-radius: 5px;
+      width: 100%;
+      transition: opacity 0.15s;
+    }
+
+    .about-join-btn:hover { opacity: 0.88; }
+
+    /* ── Footer ── */
+    .footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="logo">ALL PROMPTS</div>
+    <a href="https://allpromptshome.ploy.build/" target="_blank" rel="noopener" class="top-cta">
+      JOIN ALL PROMPTS &rarr;
+    </a>
+  </header>
+
+  <!-- Layout -->
+  <div class="layout">
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar-left">
+      <div class="brand">
+        <div class="brand-name">ALL<br><span>PROMPTS</span></div>
+        <div class="brand-sub">The Creator Prompt Library</div>
+      </div>
+
+      <ul class="nav-links">
+        <li>
+          <a href="#" class="active">
+            <span class="nav-dot" style="background:var(--accent-r)"></span>
+            Feed
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="nav-dot" style="background:var(--accent-y)"></span>
+            Weekly Blog
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="nav-dot" style="background:var(--accent-g)"></span>
+            Creator Wins
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <span class="nav-dot" style="background:var(--accent-o)"></span>
+            Challenges
+          </a>
+        </li>
+      </ul>
+
+      <a href="https://allpromptshome.ploy.build/" target="_blank" rel="noopener" class="join-btn">
+        JOIN ALL PROMPTS &rarr;
+      </a>
+    </aside>
+
+    <!-- Feed -->
+    <main class="feed-column">
+      <div class="feed-header">
+        <h2>Latest Posts</h2>
+      </div>
+
+      <div id="feed">
+        <!-- Loading state -->
+        <div class="feed-state" id="loading-state">
+          <div class="spinner"></div>
+          <p>Loading the feed&hellip;</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Right Sidebar -->
+    <aside class="sidebar-right">
+      <div class="about-card">
+        <h3>About All Prompts</h3>
+        <p>The go-to prompt library for creators who want to make money online. New drops every week. Copy, paste, profit.</p>
+        <a href="https://allpromptshome.ploy.build/" target="_blank" rel="noopener" class="about-join-btn">
+          JOIN NOW &rarr;
+        </a>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; ALL PROMPTS &mdash; Updated every time we drop something new.
+  </footer>
+
+  <script>
+    // ── Helpers ────────────────────────────────────────────────────────────────
+
+    /** Return a human-friendly relative time string. */
+    function relativeTime(iso) {
+      const now  = Date.now();
+      const then = new Date(iso).getTime();
+      const diff = Math.max(0, now - then); // ms
+
+      const minutes = Math.floor(diff / 60000);
+      const hours   = Math.floor(diff / 3600000);
+      const days    = Math.floor(diff / 86400000);
+
+      if (minutes < 1)  return 'Just now';
+      if (minutes < 60) return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
+      if (hours   < 24) return `${hours} hour${hours   !== 1 ? 's' : ''} ago`;
+      if (days    < 7)  return `${days} day${days     !== 1 ? 's' : ''} ago`;
+
+      // Older: show formatted date
+      return new Date(iso).toLocaleDateString('en-US', {
+        month: 'long', day: 'numeric', year: 'numeric'
+      });
+    }
+
+    /** Sanitize a string for safe innerHTML insertion. */
+    function esc(str) {
+      return String(str)
+        .replace(/&/g,  '&amp;')
+        .replace(/</g,  '&lt;')
+        .replace(/>/g,  '&gt;')
+        .replace(/"/g,  '&quot;')
+        .replace(/'/g,  '&#39;');
+    }
+
+    /** Map a post type string to a CSS class suffix. */
+    function badgeClass(type) {
+      return 'badge-' + String(type).trim().replace(/\s+/g, '-');
+    }
+
+    // ── Render ─────────────────────────────────────────────────────────────────
+
+    function renderPost(post) {
+      const link = esc(post.link || 'https://allpromptshome.ploy.build/');
+      const type = esc(post.type || 'NEW DROP');
+      const cls  = badgeClass(post.type || 'NEW DROP');
+
+      return `
+        <article class="post-card">
+          <div class="card-top">
+            <span class="badge ${cls}">${type}</span>
+            <span class="timestamp">${relativeTime(post.timestamp)}</span>
+          </div>
+          <h2 class="post-headline">${esc(post.headline)}</h2>
+          <p class="post-body">${esc(post.body)}</p>
+          <a href="${link}" target="_blank" rel="noopener" class="get-it-btn">
+            GET IT NOW &rarr;
+          </a>
+        </article>
+      `;
+    }
+
+    function renderFeed(posts) {
+      const feed = document.getElementById('feed');
+
+      if (!posts || posts.length === 0) {
+        feed.innerHTML = '<div class="feed-state"><p>No posts yet. Check back soon.</p></div>';
+        return;
+      }
+
+      // Newest first
+      const sorted = [...posts].sort((a, b) =>
+        new Date(b.timestamp) - new Date(a.timestamp)
+      );
+
+      feed.innerHTML = sorted.map(renderPost).join('');
+    }
+
+    // ── Fetch ──────────────────────────────────────────────────────────────────
+
+    async function loadFeed() {
+      const feed = document.getElementById('feed');
+
+      try {
+        // Cache-busting param so GitHub Pages always serves the latest JSON
+        const res = await fetch('posts.json?v=' + Date.now());
+
+        if (!res.ok) {
+          throw new Error('HTTP ' + res.status);
+        }
+
+        const posts = await res.json();
+        renderFeed(posts);
+
+      } catch (err) {
+        feed.innerHTML = `
+          <div class="feed-state">
+            <p>Could not load the feed. Make sure posts.json is in the same folder as this page.</p>
+          </div>
+        `;
+        console.error('Feed load error:', err);
+      }
+    }
+
+    // Boot
+    loadFeed();
+  </script>
+</body>
+</html>
