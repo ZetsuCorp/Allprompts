@@ -1,18 +1,29 @@
 [
   {
-    "id": 1,
-    "type": "NEW DROP",
-    "headline": "50 INSTAGRAM MARKETING PROMPTS — JUST DROPPED",
-    "body": "Stop staring at a blank screen. These 50 prompts turn your ideas into content that sells. Copy. Paste. Post.",
-    "timestamp": "2026-08-19T19:26:00",
+    "id": 3,
+    "type": "PROMPT DROP",
+    "headline": "MONEY MAGNET OFFER",
+    "prompt": "Create a bold, scroll-stopping product offer post for a digital creator selling a $25/month prompt library. The post must open with a pain point, list 4 specific things the buyer gets, use urgency without being pushy, and close with a one-line CTA. Tone: confident, creator-to-creator. No corporate language.",
+    "body": "Copy this prompt into ChatGPT and post the result directly to your feed. Converts cold followers into buyers.",
+    "timestamp": "2026-08-19T19:29:00",
     "link": "https://allpromptshome.ploy.build/"
   },
   {
     "id": 2,
-    "type": "TEST",
-    "headline": "TEST POST — FEED IS LIVE",
-    "body": "If you're reading this, the All Prompts Feed is connected and working. Posts drop here hourly.",
-    "timestamp": "2026-08-19T19:26:00",
+    "type": "PROMPT DROP",
+    "headline": "VIRAL REEL HOOK GENERATOR",
+    "prompt": "Write 10 viral Instagram Reel hooks for a creator who sells AI prompts that make money. Each hook must be under 8 words, create instant curiosity, and make the viewer feel like they are missing out on something specific. No generic hooks like 'You won't believe this.' Make every one feel urgent and real.",
+    "body": "Run this once and you have 10 hooks ready to use this week. Pick your favorite and film.",
+    "timestamp": "2026-08-19T18:00:00",
+    "link": "https://allpromptshome.ploy.build/"
+  },
+  {
+    "id": 1,
+    "type": "PROMPT DROP",
+    "headline": "LIVING CARVINGS — ART SERIES GENERATOR",
+    "prompt": "Create hyper-realistic fine art portraits of intricately carved creatures actively shaping their own material into a larger surface, debris flying with every strike. Four distinct species, each with a unique material, emotion, and workshop setting. Perfect for collectors who love ornate nature-inspired fine art.",
+    "body": "Drop this into Midjourney or DALL-E. Four unique collector-grade images from one prompt. Sell the series or use it to grow your art page.",
+    "timestamp": "2026-08-19T17:00:00",
     "link": "https://allpromptshome.ploy.build/"
   }
 ]
