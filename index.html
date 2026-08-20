@@ -4,3 +4,850 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ALL PROMPTS FEED</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f0f2f5;
+      --surface:   #ffffff;
+      --border:    #dddfe2;
+      --text:      #1c1e21;
+      --muted:     #65676b;
+      --accent:    #e41e2b;
+      --accent-h:  #c41824;
+      --prompt-bg: #f0f2f5;
+      --like-on:   #e41e2b;
+      --save-on:   #1877f2;
+      --shadow:    0 1px 2px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.05);
+      --font:      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --mono:      'SF Mono', 'Fira Mono', 'Courier New', Courier, monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Header ── */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 56px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .header-cta:hover { background: var(--accent-h); }
+
+    /* ── Layout ── */
+    .page-wrap {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+
+    .feed-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* ── Post Card ── */
+    .post-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-body {
+      padding: 20px 20px 0;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    /* ── Badge ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+      background: rgba(228,30,43,0.10);
+      color: var(--accent);
+      border: 1px solid rgba(228,30,43,0.20);
+    }
+
+    .timestamp {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .post-headline {
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .post-description {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    /* ── Prompt Box ── */
+    .prompt-box {
+      background: var(--prompt-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+
+    .prompt-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .prompt-text {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* ── Primary actions ── */
+    .primary-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .btn-copy {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 17px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: background 0.15s;
+    }
+    .btn-copy:hover  { background: var(--accent-h); }
+    .btn-copy.copied { background: #22c55e; }
+
+    .btn-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 17px;
+      border-radius: 6px;
+      border: 1.5px solid var(--accent);
+      cursor: pointer;
+      font-family: var(--font);
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-more:hover { background: var(--accent); color: #fff; }
+
+    /* ── Divider ── */
+    .card-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 20px;
+    }
+
+    /* ── Reaction summary ── */
+    .reaction-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      min-height: 34px;
+    }
+
+    .like-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .like-dot {
+      width: 18px;
+      height: 18px;
+      background: var(--like-on);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .comment-count-link {
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 13px;
+      transition: color 0.12s;
+    }
+    .comment-count-link:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+
+    /* ── Social bar ── */
+    .social-bar {
+      display: flex;
+      align-items: center;
+      padding: 2px 8px 6px;
+    }
+
+    .social-btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 9px 6px;
+      border-radius: 6px;
+      transition: background 0.12s, color 0.12s;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .social-btn:hover {
+      background: var(--prompt-bg);
+      color: var(--text);
+    }
+    .social-btn.liked { color: var(--like-on); }
+    .social-btn.saved { color: var(--save-on); }
+
+    /* ── Comment section ── */
+    .comment-section {
+      border-top: 1px solid var(--border);
+      padding: 12px 20px 16px;
+      display: none;
+    }
+    .comment-section.open { display: block; }
+
+    .comments-list { margin-bottom: 12px; }
+
+    .comment-item {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+      align-items: flex-start;
+    }
+
+    .comment-avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--prompt-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+
+    .comment-bubble {
+      background: var(--prompt-bg);
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .comment-name {
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    .comment-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .input-avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .comment-field-wrap {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      background: var(--prompt-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 10px 6px 14px;
+      gap: 6px;
+      transition: border-color 0.15s;
+    }
+    .comment-field-wrap:focus-within { border-color: #bbb; }
+
+    .comment-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: var(--font);
+      font-size: 13px;
+      color: var(--text);
+      outline: none;
+      resize: none;
+      min-height: 20px;
+      max-height: 120px;
+      line-height: 1.5;
+      padding: 2px 0;
+    }
+    .comment-input::placeholder { color: var(--muted); }
+
+    .comment-submit {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 2px 4px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      opacity: 0.35;
+      transition: opacity 0.15s;
+      flex-shrink: 0;
+    }
+    .comment-submit.active { opacity: 1; }
+    .comment-submit:hover  { opacity: 1; }
+
+    /* ── Loading / Error ── */
+    .feed-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+    .feed-state .spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .feed-state p { font-size: 14px; }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      padding: 28px 24px 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .footer a { color: var(--accent); font-weight: 600; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* ── Mobile ── */
+    @media (max-width: 480px) {
+      .top-bar { padding: 0 14px; }
+      .page-wrap { padding: 18px 8px 48px; }
+      .card-body { padding: 16px 14px 0; }
+      .card-divider { margin: 0 14px; }
+      .reaction-summary { padding: 7px 14px; }
+      .social-bar { padding: 2px 4px 6px; }
+      .social-btn { font-size: 12px; gap: 4px; padding: 8px 4px; }
+      .comment-section { padding: 12px 14px 14px; }
+      .post-headline { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="logo">ALL PROMPTS FEED</div>
+    <a href="https://allpromptshome.ploy.build/" target="_blank" rel="noopener" class="header-cta">
+      Get More &rarr;
+    </a>
+  </header>
+
+  <div class="page-wrap">
+    <div class="feed-label">Latest Posts</div>
+    <div id="feed">
+      <div class="feed-state">
+        <div class="spinner"></div>
+        <p>Loading the feed&hellip;</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    ALL PROMPTS &mdash; Updated Hourly &nbsp;&middot;&nbsp;
+    <a href="https://allpromptshome.ploy.build/" target="_blank" rel="noopener">Visit the Library</a>
+  </footer>
+
+  <script>
+    // ── localStorage store ───────────────────────────────────────────────────
+
+    const STORE_KEY = 'ap_social_v1';
+
+    function loadStore() {
+      try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+      catch { return {}; }
+    }
+
+    function saveStore(s) {
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(s)); } catch {}
+    }
+
+    function postData(store, id) {
+      if (!store[id]) store[id] = { liked: false, likeCount: 0, saved: false, comments: [] };
+      return store[id];
+    }
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+
+    function relativeTime(iso) {
+      const diff = Math.max(0, Date.now() - new Date(iso).getTime());
+      const m = Math.floor(diff / 60000);
+      const h = Math.floor(diff / 3600000);
+      const d = Math.floor(diff / 86400000);
+      if (m < 1)  return 'Just now';
+      if (m < 60) return m + 'm ago';
+      if (h < 24) return h + 'h ago';
+      if (d <  7) return d + 'd ago';
+      return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    }
+
+    function esc(str) {
+      return String(str ?? '')
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    // ── SVG icons ────────────────────────────────────────────────────────────
+
+    function iconLike(on) {
+      return '<svg width="18" height="18" viewBox="0 0 24 24" fill="' + (on ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';
+    }
+    function iconComment() {
+      return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+    }
+    function iconSave(on) {
+      return '<svg width="18" height="18" viewBox="0 0 24 24" fill="' + (on ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
+    }
+    function iconSend() {
+      return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+    }
+
+    // ── Render comments ──────────────────────────────────────────────────────
+
+    function renderComments(comments) {
+      if (!comments || !comments.length) return '';
+      return '<div class="comments-list">' +
+        comments.map(function(c) {
+          return '<div class="comment-item">' +
+            '<div class="comment-avatar">' + esc(c.name ? c.name[0].toUpperCase() : 'Y') + '</div>' +
+            '<div class="comment-bubble">' +
+              '<div class="comment-name">' + esc(c.name || 'You') + '</div>' +
+              esc(c.text) +
+            '</div>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+    }
+
+    // ── Render reaction summary ──────────────────────────────────────────────
+
+    function reactionHTML(pd, id) {
+      var likeCount    = pd.likeCount || 0;
+      var commentCount = pd.comments ? pd.comments.length : 0;
+      var hasAny       = likeCount > 0 || commentCount > 0;
+      return '<div class="reaction-summary" data-id="' + esc(id) + '" style="' + (hasAny ? '' : 'display:none;') + '">' +
+        '<div class="like-pill">' +
+          (likeCount > 0 ? '<span class="like-dot">&#128077;</span><span>' + likeCount + '</span>' : '') +
+        '</div>' +
+        (commentCount > 0 ? '<span class="comment-count-link" data-id="' + esc(id) + '">' + commentCount + ' comment' + (commentCount !== 1 ? 's' : '') + '</span>' : '') +
+      '</div>';
+    }
+
+    // ── Render post card ─────────────────────────────────────────────────────
+
+    function renderPost(post, store) {
+      var id   = String(post.id != null ? post.id : post.timestamp);
+      var pd   = postData(store, id);
+      var link = esc(post.link || 'https://allpromptshome.ploy.build/');
+      var type = esc(post.type || 'PROMPT DROP');
+
+      var promptSection = post.prompt ? (
+        '<div class="prompt-box">' +
+          '<div class="prompt-label">Prompt</div>' +
+          '<div class="prompt-text">' + esc(post.prompt) + '</div>' +
+        '</div>'
+      ) : '';
+
+      var copyBtn = post.prompt ? (
+        '<button class="btn-copy" data-prompt="' + esc(post.prompt) + '" data-id="' + esc(id) + '">Copy Prompt</button>'
+      ) : '';
+
+      return (
+        '<article class="post-card" data-id="' + esc(id) + '">' +
+          '<div class="card-body">' +
+            '<div class="card-top">' +
+              '<span class="badge">' + type + '</span>' +
+              '<span class="timestamp">' + relativeTime(post.timestamp) + '</span>' +
+            '</div>' +
+            '<h2 class="post-headline">' + esc(post.headline || '') + '</h2>' +
+            (post.body ? '<p class="post-description">' + esc(post.body) + '</p>' : '') +
+            promptSection +
+            '<div class="primary-actions">' +
+              copyBtn +
+              '<a href="' + link + '" target="_blank" rel="noopener" class="btn-more">Get More &rarr;</a>' +
+            '</div>' +
+          '</div>' +
+
+          '<hr class="card-divider" />' +
+          reactionHTML(pd, id) +
+          '<hr class="card-divider" />' +
+
+          '<div class="social-bar">' +
+            '<button class="social-btn like-btn' + (pd.liked ? ' liked' : '') + '" data-id="' + esc(id) + '">' +
+              iconLike(pd.liked) + '<span>' + (pd.liked ? 'Liked' : 'Like') + '</span>' +
+            '</button>' +
+            '<button class="social-btn comment-btn" data-id="' + esc(id) + '">' +
+              iconComment() + '<span>Comment</span>' +
+            '</button>' +
+            '<button class="social-btn save-btn' + (pd.saved ? ' saved' : '') + '" data-id="' + esc(id) + '">' +
+              iconSave(pd.saved) + '<span>' + (pd.saved ? 'Saved' : 'Save') + '</span>' +
+            '</button>' +
+          '</div>' +
+
+          '<div class="comment-section" data-id="' + esc(id) + '">' +
+            renderComments(pd.comments) +
+            '<div class="comment-input-row">' +
+              '<div class="input-avatar">A</div>' +
+              '<div class="comment-field-wrap">' +
+                '<textarea class="comment-input" placeholder="Write a comment\u2026" rows="1" data-id="' + esc(id) + '"></textarea>' +
+                '<button class="comment-submit" data-id="' + esc(id) + '" title="Post">' + iconSend() + '</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div style="font-size:11px;color:#888;border-top:1px solid #e0e0e0;margin-top:12px;padding-top:8px;text-align:center;">Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber</div>' +
+        '</article>'
+      );
+    }
+
+    // ── Render full feed ─────────────────────────────────────────────────────
+
+    function renderFeed(posts) {
+      var feed  = document.getElementById('feed');
+      var store = loadStore();
+
+      if (!posts || !posts.length) {
+        feed.innerHTML = '<div class="feed-state"><p>No posts yet. Check back soon.</p></div>';
+        return;
+      }
+
+      var sorted = posts.slice().sort(function(a, b) {
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      });
+
+      feed.innerHTML = sorted.map(function(p) { return renderPost(p, store); }).join('');
+      attachAll();
+    }
+
+    // ── Wire up all interactions ─────────────────────────────────────────────
+
+    function attachAll() {
+      var feed = document.getElementById('feed');
+
+      // Like
+      feed.querySelectorAll('.like-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var id    = btn.dataset.id;
+          var store = loadStore();
+          var pd    = postData(store, id);
+          pd.liked      = !pd.liked;
+          pd.likeCount  = Math.max(0, (pd.likeCount || 0) + (pd.liked ? 1 : -1));
+          saveStore(store);
+
+          btn.classList.toggle('liked', pd.liked);
+          btn.innerHTML = iconLike(pd.liked) + '<span>' + (pd.liked ? 'Liked' : 'Like') + '</span>';
+          refreshReactionRow(id, store);
+        });
+      });
+
+      // Comment toggle
+      feed.querySelectorAll('.comment-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          toggleComments(btn.dataset.id, true);
+        });
+      });
+
+      // Save
+      feed.querySelectorAll('.save-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var id    = btn.dataset.id;
+          var store = loadStore();
+          var pd    = postData(store, id);
+          pd.saved = !pd.saved;
+          saveStore(store);
+
+          btn.classList.toggle('saved', pd.saved);
+          btn.innerHTML = iconSave(pd.saved) + '<span>' + (pd.saved ? 'Saved' : 'Save') + '</span>';
+        });
+      });
+
+      // Copy prompt
+      feed.querySelectorAll('.btn-copy').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var text = btn.dataset.prompt;
+          if (!text) return;
+          var done = function() {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(function() {
+              btn.textContent = 'Copy Prompt';
+              btn.classList.remove('copied');
+            }, 2000);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done).catch(function() {
+              var ta = document.createElement('textarea');
+              ta.value = text;
+              ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+              document.body.appendChild(ta);
+              ta.select();
+              try { document.execCommand('copy'); } catch(e) {}
+              document.body.removeChild(ta);
+              done();
+            });
+          } else {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch(e) {}
+            document.body.removeChild(ta);
+            done();
+          }
+        });
+      });
+
+      // Textarea auto-resize + submit activation
+      feed.querySelectorAll('.comment-input').forEach(function(ta) {
+        var wrap   = ta.closest('.comment-field-wrap');
+        var submit = wrap.querySelector('.comment-submit');
+
+        ta.addEventListener('input', function() {
+          ta.style.height = 'auto';
+          ta.style.height = ta.scrollHeight + 'px';
+          submit.classList.toggle('active', ta.value.trim().length > 0);
+        });
+
+        ta.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            if (ta.value.trim()) submitComment(ta.dataset.id, ta, submit);
+          }
+        });
+      });
+
+      // Submit button
+      feed.querySelectorAll('.comment-submit').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var ta = btn.closest('.comment-field-wrap').querySelector('.comment-input');
+          if (ta && ta.value.trim()) submitComment(ta.dataset.id, ta, btn);
+        });
+      });
+
+      // Comment count link
+      feed.querySelectorAll('.comment-count-link').forEach(function(el) {
+        el.addEventListener('click', function() {
+          toggleComments(el.dataset.id, true);
+        });
+      });
+    }
+
+    // ── Submit a comment ─────────────────────────────────────────────────────
+
+    function submitComment(id, ta, submitBtn) {
+      var text = ta.value.trim();
+      if (!text) return;
+      var store = loadStore();
+      var pd    = postData(store, id);
+      pd.comments.push({ name: 'You', text: text, ts: new Date().toISOString() });
+      saveStore(store);
+
+      ta.value = '';
+      ta.style.height = 'auto';
+      submitBtn.classList.remove('active');
+
+      var section = document.querySelector('.comment-section[data-id="' + id + '"]');
+      if (section) {
+        section.querySelector('.comments-list') && section.querySelector('.comments-list').remove();
+        section.insertAdjacentHTML('afterbegin', renderComments(pd.comments));
+      }
+      refreshReactionRow(id, store);
+    }
+
+    // ── Toggle comment panel ─────────────────────────────────────────────────
+
+    function toggleComments(id, forceOpen) {
+      var section = document.querySelector('.comment-section[data-id="' + id + '"]');
+      if (!section) return;
+      if (forceOpen) {
+        section.classList.add('open');
+        section.querySelector('.comment-input') && section.querySelector('.comment-input').focus();
+      } else {
+        section.classList.toggle('open');
+      }
+    }
+
+    // ── Refresh reaction row ─────────────────────────────────────────────────
+
+    function refreshReactionRow(id, store) {
+      var row = document.querySelector('.reaction-summary[data-id="' + id + '"]');
+      if (!row) return;
+      var pd = postData(store, id);
+      var html = reactionHTML(pd, id);
+      var tmp = document.createElement('div');
+      tmp.innerHTML = html;
+      var newRow = tmp.firstChild;
+      row.parentNode.replaceChild(newRow, row);
+      newRow.querySelector('.comment-count-link') && newRow.querySelector('.comment-count-link').addEventListener('click', function(el) {
+        toggleComments(newRow.querySelector('.comment-count-link').dataset.id, true);
+      });
+    }
+
+    // ── Load feed from posts.json ─────────────────────────────────────────────
+
+    function loadFeed() {
+      var url = 'posts.json';
+      if (typeof fetch !== 'undefined') {
+        fetch(url)
+          .then(function(r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+          })
+          .then(renderFeed)
+          .catch(function(err) {
+            document.getElementById('feed').innerHTML = '<div class="feed-state"><p>Could not load posts. Make sure posts.json is in the same folder as this page.</p></div>';
+            console.error('Feed load error:', err);
+          });
+      } else {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            try { renderFeed(JSON.parse(xhr.responseText)); }
+            catch(e) {
+              document.getElementById('feed').innerHTML = '<div class="feed-state"><p>Could not parse posts.json.</p></div>';
+            }
+          } else {
+            document.getElementById('feed').innerHTML = '<div class="feed-state"><p>Could not load posts. Make sure posts.json is in the same folder as this page.</p></div>';
+          }
+        };
+        xhr.onerror = function() {
+          document.getElementById('feed').innerHTML = '<div class="feed-state"><p>Could not load posts. Make sure posts.json is in the same folder as this page.</p></div>';
+          console.error('Feed load error:', err);
+        };
+        xhr.send();
+      }
+    }
+
+    loadFeed();
+  </script>
+</body>
+</html>
