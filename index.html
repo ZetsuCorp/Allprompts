@@ -5,22 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ALL PROMPTS FEED</title>
   <style>
-    /* ── Reset & Base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0a0a0a;
-      --surface:   #141414;
-      --border:    #222222;
-      --text:      #e8e8e8;
-      --muted:     #888888;
-      --accent-r:  #ff3c2f;
-      --accent-c:  #00d4ff;
-      --accent-y:  #f5c400;
-      --accent-g:  #22c55e;
-      --accent-o:  #f97316;
-      --headline-font: 'Impact', 'Arial Black', sans-serif;
-      --body-font:     'Inter', 'Helvetica Neue', Arial, sans-serif;
+      --bg:        #f0f2f5;
+      --surface:   #ffffff;
+      --border:    #dddfe2;
+      --text:      #1c1e21;
+      --muted:     #65676b;
+      --accent:    #e41e2b;
+      --accent-h:  #c41824;
+      --prompt-bg: #f0f2f5;
+      --like-on:   #e41e2b;
+      --save-on:   #1877f2;
+      --shadow:    0 1px 2px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.05);
+      --font:      -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --mono:      'SF Mono', 'Fira Mono', 'Courier New', Courier, monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -28,170 +28,64 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--body-font);
+      font-family: var(--font);
       min-height: 100vh;
       line-height: 1.6;
     }
 
     a { color: inherit; text-decoration: none; }
 
-    /* ── Top Bar ── */
+    /* ── Header ── */
     .top-bar {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: #0a0a0aee;
-      backdrop-filter: blur(8px);
+      background: var(--surface);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 24px;
       height: 56px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
 
-    .top-bar .logo {
-      font-family: var(--headline-font);
-      font-size: 20px;
-      letter-spacing: 0.06em;
-      color: var(--accent-r);
+    .logo {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      text-transform: uppercase;
     }
 
-    .top-bar .top-cta {
-      display: none;
+    .header-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 6px;
+      transition: background 0.15s;
     }
-
-    @media (max-width: 900px) {
-      .top-bar .top-cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: var(--accent-r);
-        color: #fff;
-        font-family: var(--headline-font);
-        font-size: 13px;
-        letter-spacing: 0.08em;
-        padding: 7px 16px;
-        border-radius: 4px;
-      }
-    }
+    .header-cta:hover { background: var(--accent-h); }
 
     /* ── Layout ── */
-    .layout {
-      display: grid;
-      grid-template-columns: 240px 1fr 220px;
-      gap: 24px;
-      max-width: 1100px;
+    .page-wrap {
+      max-width: 600px;
       margin: 0 auto;
-      padding: 32px 20px;
-      align-items: start;
+      padding: 24px 16px 64px;
     }
 
-    @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: 1fr;
-      }
-      .sidebar-left, .sidebar-right { display: none; }
-    }
-
-    /* ── Left Sidebar ── */
-    .sidebar-left {
-      position: sticky;
-      top: 72px;
-    }
-
-    .sidebar-left .brand {
-      margin-bottom: 28px;
-    }
-
-    .sidebar-left .brand-name {
-      font-family: var(--headline-font);
-      font-size: 26px;
-      letter-spacing: 0.06em;
-      line-height: 1.1;
-      color: #fff;
-    }
-
-    .sidebar-left .brand-name span {
-      color: var(--accent-r);
-    }
-
-    .sidebar-left .brand-sub {
+    .feed-label {
       font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
       letter-spacing: 0.12em;
-      text-transform: uppercase;
       color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .nav-links {
-      list-style: none;
-      margin-bottom: 28px;
-    }
-
-    .nav-links li {
-      margin-bottom: 2px;
-    }
-
-    .nav-links a {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 12px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--muted);
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      background: var(--surface);
-      color: var(--text);
-    }
-
-    .nav-links a .nav-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .join-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background: var(--accent-r);
-      color: #fff;
-      font-family: var(--headline-font);
-      font-size: 15px;
-      letter-spacing: 0.1em;
-      padding: 13px 20px;
-      border-radius: 6px;
-      width: 100%;
-      transition: opacity 0.15s;
-    }
-
-    .join-btn:hover { opacity: 0.88; }
-
-    /* ── Feed Column ── */
-    .feed-column {}
-
-    .feed-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .feed-header h2 {
-      font-family: var(--headline-font);
-      font-size: 13px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
+      margin-bottom: 14px;
     }
 
     /* ── Post Card ── */
@@ -199,38 +93,36 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 22px 24px;
-      margin-bottom: 16px;
-      transition: border-color 0.15s;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    .post-card:hover {
-      border-color: #333;
+    .card-body {
+      padding: 20px 20px 0;
     }
 
     .card-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
-    /* ── Type Badge ── */
+    /* ── Badge ── */
     .badge {
       display: inline-flex;
       align-items: center;
       font-size: 10px;
       font-weight: 800;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 3px 9px;
       border-radius: 4px;
+      background: rgba(228,30,43,0.10);
+      color: var(--accent);
+      border: 1px solid rgba(228,30,43,0.20);
     }
-
-    .badge-NEW-DROP    { background: rgba(0, 212, 255, 0.12); color: var(--accent-c); border: 1px solid rgba(0, 212, 255, 0.25); }
-    .badge-WEEKLY-BLOG { background: rgba(245, 196, 0, 0.12); color: var(--accent-y); border: 1px solid rgba(245, 196, 0, 0.25); }
-    .badge-CREATOR-WIN { background: rgba(34, 197, 94, 0.12); color: var(--accent-g); border: 1px solid rgba(34, 197, 94, 0.25); }
-    .badge-CHALLENGE   { background: rgba(249, 115, 22, 0.12); color: var(--accent-o); border: 1px solid rgba(249, 115, 22, 0.25); }
 
     .timestamp {
       font-size: 12px;
@@ -238,306 +130,705 @@
     }
 
     .post-headline {
-      font-family: var(--headline-font);
-      font-size: 22px;
-      letter-spacing: 0.03em;
-      line-height: 1.15;
-      color: #fff;
-      margin-bottom: 10px;
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 8px;
     }
 
-    .post-body {
+    .post-description {
       font-size: 14px;
-      color: #aaa;
-      line-height: 1.65;
-      margin-bottom: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
     }
 
-    .get-it-btn {
+    /* ── Prompt Box ── */
+    .prompt-box {
+      background: var(--prompt-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+
+    .prompt-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .prompt-text {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* ── Primary actions ── */
+    .primary-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .btn-copy {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: var(--accent-r);
+      gap: 6px;
+      background: var(--accent);
       color: #fff;
-      font-family: var(--headline-font);
       font-size: 13px;
-      letter-spacing: 0.1em;
-      padding: 10px 20px;
-      border-radius: 5px;
-      transition: opacity 0.15s;
+      font-weight: 700;
+      padding: 9px 17px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: background 0.15s;
+    }
+    .btn-copy:hover  { background: var(--accent-h); }
+    .btn-copy.copied { background: #22c55e; }
+
+    .btn-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 17px;
+      border-radius: 6px;
+      border: 1.5px solid var(--accent);
+      cursor: pointer;
+      font-family: var(--font);
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-more:hover { background: var(--accent); color: #fff; }
+
+    /* ── Divider ── */
+    .card-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 20px;
     }
 
-    .get-it-btn:hover { opacity: 0.88; }
+    /* ── Reaction summary ── */
+    .reaction-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      min-height: 34px;
+    }
 
-    /* ── Loading / Error States ── */
+    .like-pill {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .like-dot {
+      width: 18px;
+      height: 18px;
+      background: var(--like-on);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .comment-count-link {
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 13px;
+      transition: color 0.12s;
+    }
+    .comment-count-link:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+
+    /* ── Social bar ── */
+    .social-bar {
+      display: flex;
+      align-items: center;
+      padding: 2px 8px 6px;
+    }
+
+    .social-btn {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 9px 6px;
+      border-radius: 6px;
+      transition: background 0.12s, color 0.12s;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .social-btn:hover {
+      background: var(--prompt-bg);
+      color: var(--text);
+    }
+    .social-btn.liked { color: var(--like-on); }
+    .social-btn.saved { color: var(--save-on); }
+
+    /* ── Comment section ── */
+    .comment-section {
+      border-top: 1px solid var(--border);
+      padding: 12px 20px 16px;
+      display: none;
+    }
+    .comment-section.open { display: block; }
+
+    .comments-list { margin-bottom: 12px; }
+
+    .comment-item {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+      align-items: flex-start;
+    }
+
+    .comment-avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--prompt-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+
+    .comment-bubble {
+      background: var(--prompt-bg);
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .comment-name {
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    .comment-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .input-avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .comment-field-wrap {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      background: var(--prompt-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 10px 6px 14px;
+      gap: 6px;
+      transition: border-color 0.15s;
+    }
+    .comment-field-wrap:focus-within { border-color: #bbb; }
+
+    .comment-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: var(--font);
+      font-size: 13px;
+      color: var(--text);
+      outline: none;
+      resize: none;
+      min-height: 20px;
+      max-height: 120px;
+      line-height: 1.5;
+      padding: 2px 0;
+    }
+    .comment-input::placeholder { color: var(--muted); }
+
+    .comment-submit {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 2px 4px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      opacity: 0.35;
+      transition: opacity 0.15s;
+      flex-shrink: 0;
+    }
+    .comment-submit.active { opacity: 1; }
+    .comment-submit:hover  { opacity: 1; }
+
+    /* ── Loading / Error ── */
     .feed-state {
       text-align: center;
       padding: 60px 20px;
       color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
     }
-
     .feed-state .spinner {
       width: 32px;
       height: 32px;
       border: 3px solid var(--border);
-      border-top-color: var(--accent-r);
+      border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin 0.75s linear infinite;
       margin: 0 auto 16px;
     }
-
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    .feed-state p {
-      font-size: 14px;
-    }
-
-    /* ── Right Sidebar ── */
-    .sidebar-right {
-      position: sticky;
-      top: 72px;
-    }
-
-    .about-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-    }
-
-    .about-card h3 {
-      font-family: var(--headline-font);
-      font-size: 14px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--accent-r);
-      margin-bottom: 10px;
-    }
-
-    .about-card p {
-      font-size: 13px;
-      color: #999;
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-
-    .about-join-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--accent-r);
-      color: #fff;
-      font-family: var(--headline-font);
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      padding: 10px;
-      border-radius: 5px;
-      width: 100%;
-      transition: opacity 0.15s;
-    }
-
-    .about-join-btn:hover { opacity: 0.88; }
+    .feed-state p { font-size: 14px; }
 
     /* ── Footer ── */
     .footer {
-      border-top: 1px solid var(--border);
       text-align: center;
-      padding: 24px;
+      padding: 28px 24px 12px;
       font-size: 12px;
       color: var(--muted);
-      margin-top: 40px;
+    }
+    .footer a { color: var(--accent); font-weight: 600; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* ── Mobile ── */
+    @media (max-width: 480px) {
+      .top-bar { padding: 0 14px; }
+      .page-wrap { padding: 18px 8px 48px; }
+      .card-body { padding: 16px 14px 0; }
+      .card-divider { margin: 0 14px; }
+      .reaction-summary { padding: 7px 14px; }
+      .social-bar { padding: 2px 4px 6px; }
+      .social-btn { font-size: 12px; gap: 4px; padding: 8px 4px; }
+      .comment-section { padding: 12px 14px 14px; }
+      .post-headline { font-size: 16px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Bar -->
   <header class="top-bar">
-    <div class="logo">ALL PROMPTS</div>
-    <a href="https://allpromptshome.ploy.build/" target="_blank" rel="noopener" class="top-cta">
-      JOIN ALL PROMPTS &rarr;
+    <div class="logo">ALL PROMPTS FEED</div>
+    <a href="https://allpromptshome.ploy.build/" target="_blank" rel="noopener" class="header-cta">
+      Get More &rarr;
     </a>
   </header>
 
-  <!-- Layout -->
-  <div class="layout">
-
-    <!-- Left Sidebar -->
-    <aside class="sidebar-left">
-      <div class="brand">
-        <div class="brand-name">ALL<br><span>PROMPTS</span></div>
-        <div class="brand-sub">The Creator Prompt Library</div>
+  <div class="page-wrap">
+    <div class="feed-label">Latest Posts</div>
+    <div id="feed">
+      <div class="feed-state">
+        <div class="spinner"></div>
+        <p>Loading the feed&hellip;</p>
       </div>
-
-      <ul class="nav-links">
-        <li>
-          <a href="#" class="active">
-            <span class="nav-dot" style="background:var(--accent-r)"></span>
-            Feed
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <span class="nav-dot" style="background:var(--accent-y)"></span>
-            Weekly Blog
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <span class="nav-dot" style="background:var(--accent-g)"></span>
-            Creator Wins
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <span class="nav-dot" style="background:var(--accent-o)"></span>
-            Challenges
-          </a>
-        </li>
-      </ul>
-
-      <a href="https://allpromptshome.ploy.build/" target="_blank" rel="noopener" class="join-btn">
-        JOIN ALL PROMPTS &rarr;
-      </a>
-    </aside>
-
-    <!-- Feed -->
-    <main class="feed-column">
-      <div class="feed-header">
-        <h2>Latest Posts</h2>
-      </div>
-
-      <div id="feed">
-        <!-- Loading state -->
-        <div class="feed-state" id="loading-state">
-          <div class="spinner"></div>
-          <p>Loading the feed&hellip;</p>
-        </div>
-      </div>
-    </main>
-
-    <!-- Right Sidebar -->
-    <aside class="sidebar-right">
-      <div class="about-card">
-        <h3>About All Prompts</h3>
-        <p>The go-to prompt library for creators who want to make money online. New drops every week. Copy, paste, profit.</p>
-        <a href="https://allpromptshome.ploy.build/" target="_blank" rel="noopener" class="about-join-btn">
-          JOIN NOW &rarr;
-        </a>
-      </div>
-    </aside>
-
+    </div>
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
-    &copy; ALL PROMPTS &mdash; Updated every time we drop something new.
+    ALL PROMPTS &mdash; Updated Hourly &nbsp;&middot;&nbsp;
+    <a href="https://allpromptshome.ploy.build/" target="_blank" rel="noopener">Visit the Library</a>
   </footer>
 
   <script>
-    // ── Helpers ────────────────────────────────────────────────────────────────
+    // ── localStorage store ───────────────────────────────────────────────────
 
-    /** Return a human-friendly relative time string. */
+    const STORE_KEY = 'ap_social_v1';
+
+    function loadStore() {
+      try { return JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); }
+      catch { return {}; }
+    }
+
+    function saveStore(s) {
+      try { localStorage.setItem(STORE_KEY, JSON.stringify(s)); } catch {}
+    }
+
+    function postData(store, id) {
+      if (!store[id]) store[id] = { liked: false, likeCount: 0, saved: false, comments: [] };
+      return store[id];
+    }
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+
     function relativeTime(iso) {
-      const now  = Date.now();
-      const then = new Date(iso).getTime();
-      const diff = Math.max(0, now - then); // ms
-
-      const minutes = Math.floor(diff / 60000);
-      const hours   = Math.floor(diff / 3600000);
-      const days    = Math.floor(diff / 86400000);
-
-      if (minutes < 1)  return 'Just now';
-      if (minutes < 60) return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
-      if (hours   < 24) return `${hours} hour${hours   !== 1 ? 's' : ''} ago`;
-      if (days    < 7)  return `${days} day${days     !== 1 ? 's' : ''} ago`;
-
-      // Older: show formatted date
-      return new Date(iso).toLocaleDateString('en-US', {
-        month: 'long', day: 'numeric', year: 'numeric'
-      });
+      const diff = Math.max(0, Date.now() - new Date(iso).getTime());
+      const m = Math.floor(diff / 60000);
+      const h = Math.floor(diff / 3600000);
+      const d = Math.floor(diff / 86400000);
+      if (m < 1)  return 'Just now';
+      if (m < 60) return m + 'm ago';
+      if (h < 24) return h + 'h ago';
+      if (d <  7) return d + 'd ago';
+      return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     }
 
-    /** Sanitize a string for safe innerHTML insertion. */
     function esc(str) {
-      return String(str)
-        .replace(/&/g,  '&amp;')
-        .replace(/</g,  '&lt;')
-        .replace(/>/g,  '&gt;')
-        .replace(/"/g,  '&quot;')
-        .replace(/'/g,  '&#39;');
+      return String(str ?? '')
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
     }
 
-    /** Map a post type string to a CSS class suffix. */
-    function badgeClass(type) {
-      return 'badge-' + String(type).trim().replace(/\s+/g, '-');
+    // ── SVG icons ────────────────────────────────────────────────────────────
+
+    function iconLike(on) {
+      return '<svg width="18" height="18" viewBox="0 0 24 24" fill="' + (on ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>';
+    }
+    function iconComment() {
+      return '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+    }
+    function iconSave(on) {
+      return '<svg width="18" height="18" viewBox="0 0 24 24" fill="' + (on ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>';
+    }
+    function iconSend() {
+      return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
     }
 
-    // ── Render ─────────────────────────────────────────────────────────────────
+    // ── Render comments ──────────────────────────────────────────────────────
 
-    function renderPost(post) {
-      const link = esc(post.link || 'https://allpromptshome.ploy.build/');
-      const type = esc(post.type || 'NEW DROP');
-      const cls  = badgeClass(post.type || 'NEW DROP');
-
-      return `
-        <article class="post-card">
-          <div class="card-top">
-            <span class="badge ${cls}">${type}</span>
-            <span class="timestamp">${relativeTime(post.timestamp)}</span>
-          </div>
-          <h2 class="post-headline">${esc(post.headline)}</h2>
-          <p class="post-body">${esc(post.body)}</p>
-          <a href="${link}" target="_blank" rel="noopener" class="get-it-btn">
-            GET IT NOW &rarr;
-          </a>
-        </article>
-      `;
+    function renderComments(comments) {
+      if (!comments || !comments.length) return '';
+      return '<div class="comments-list">' +
+        comments.map(function(c) {
+          return '<div class="comment-item">' +
+            '<div class="comment-avatar">' + esc(c.name ? c.name[0].toUpperCase() : 'Y') + '</div>' +
+            '<div class="comment-bubble">' +
+              '<div class="comment-name">' + esc(c.name || 'You') + '</div>' +
+              esc(c.text) +
+            '</div>' +
+          '</div>';
+        }).join('') +
+      '</div>';
     }
+
+    // ── Render reaction summary ──────────────────────────────────────────────
+
+    function reactionHTML(pd, id) {
+      var likeCount    = pd.likeCount || 0;
+      var commentCount = pd.comments ? pd.comments.length : 0;
+      var hasAny       = likeCount > 0 || commentCount > 0;
+      return '<div class="reaction-summary" data-id="' + esc(id) + '" style="' + (hasAny ? '' : 'display:none;') + '">' +
+        '<div class="like-pill">' +
+          (likeCount > 0 ? '<span class="like-dot">&#128077;</span><span>' + likeCount + '</span>' : '') +
+        '</div>' +
+        (commentCount > 0 ? '<span class="comment-count-link" data-id="' + esc(id) + '">' + commentCount + ' comment' + (commentCount !== 1 ? 's' : '') + '</span>' : '') +
+      '</div>';
+    }
+
+    // ── Render post card ─────────────────────────────────────────────────────
+
+    function renderPost(post, store) {
+      var id   = String(post.id != null ? post.id : post.timestamp);
+      var pd   = postData(store, id);
+      var link = esc(post.link || 'https://allpromptshome.ploy.build/');
+      var type = esc(post.type || 'PROMPT DROP');
+
+      var promptSection = post.prompt ? (
+        '<div class="prompt-box">' +
+          '<div class="prompt-label">Prompt</div>' +
+          '<div class="prompt-text">' + esc(post.prompt) + '</div>' +
+        '</div>'
+      ) : '';
+
+      var copyBtn = post.prompt ? (
+        '<button class="btn-copy" data-prompt="' + esc(post.prompt) + '" data-id="' + esc(id) + '">Copy Prompt</button>'
+      ) : '';
+
+      return (
+        '<article class="post-card" data-id="' + esc(id) + '">' +
+          '<div class="card-body">' +
+            '<div class="card-top">' +
+              '<span class="badge">' + type + '</span>' +
+              '<span class="timestamp">' + relativeTime(post.timestamp) + '</span>' +
+            '</div>' +
+            '<h2 class="post-headline">' + esc(post.headline || '') + '</h2>' +
+            (post.body ? '<p class="post-description">' + esc(post.body) + '</p>' : '') +
+            promptSection +
+            '<div class="primary-actions">' +
+              copyBtn +
+              '<a href="' + link + '" target="_blank" rel="noopener" class="btn-more">Get More &rarr;</a>' +
+            '</div>' +
+          '</div>' +
+
+          '<hr class="card-divider" />' +
+          reactionHTML(pd, id) +
+          '<hr class="card-divider" />' +
+
+          '<div class="social-bar">' +
+            '<button class="social-btn like-btn' + (pd.liked ? ' liked' : '') + '" data-id="' + esc(id) + '">' +
+              iconLike(pd.liked) + '<span>' + (pd.liked ? 'Liked' : 'Like') + '</span>' +
+            '</button>' +
+            '<button class="social-btn comment-btn" data-id="' + esc(id) + '">' +
+              iconComment() + '<span>Comment</span>' +
+            '</button>' +
+            '<button class="social-btn save-btn' + (pd.saved ? ' saved' : '') + '" data-id="' + esc(id) + '">' +
+              iconSave(pd.saved) + '<span>' + (pd.saved ? 'Saved' : 'Save') + '</span>' +
+            '</button>' +
+          '</div>' +
+
+          '<div class="comment-section" data-id="' + esc(id) + '">' +
+            renderComments(pd.comments) +
+            '<div class="comment-input-row">' +
+              '<div class="input-avatar">A</div>' +
+              '<div class="comment-field-wrap">' +
+                '<textarea class="comment-input" placeholder="Write a comment\u2026" rows="1" data-id="' + esc(id) + '"></textarea>' +
+                '<button class="comment-submit" data-id="' + esc(id) + '" title="Post">' + iconSend() + '</button>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</article>'
+      );
+    }
+
+    // ── Render full feed ─────────────────────────────────────────────────────
 
     function renderFeed(posts) {
-      const feed = document.getElementById('feed');
+      var feed  = document.getElementById('feed');
+      var store = loadStore();
 
-      if (!posts || posts.length === 0) {
+      if (!posts || !posts.length) {
         feed.innerHTML = '<div class="feed-state"><p>No posts yet. Check back soon.</p></div>';
         return;
       }
 
-      // Newest first
-      const sorted = [...posts].sort((a, b) =>
-        new Date(b.timestamp) - new Date(a.timestamp)
-      );
+      var sorted = posts.slice().sort(function(a, b) {
+        return new Date(b.timestamp) - new Date(a.timestamp);
+      });
 
-      feed.innerHTML = sorted.map(renderPost).join('');
+      feed.innerHTML = sorted.map(function(p) { return renderPost(p, store); }).join('');
+      attachAll();
     }
 
-    // ── Fetch ──────────────────────────────────────────────────────────────────
+    // ── Wire up all interactions ─────────────────────────────────────────────
+
+    function attachAll() {
+      var feed = document.getElementById('feed');
+
+      // Like
+      feed.querySelectorAll('.like-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var id    = btn.dataset.id;
+          var store = loadStore();
+          var pd    = postData(store, id);
+          pd.liked      = !pd.liked;
+          pd.likeCount  = Math.max(0, (pd.likeCount || 0) + (pd.liked ? 1 : -1));
+          saveStore(store);
+
+          btn.classList.toggle('liked', pd.liked);
+          btn.innerHTML = iconLike(pd.liked) + '<span>' + (pd.liked ? 'Liked' : 'Like') + '</span>';
+          refreshReactionRow(id, store);
+        });
+      });
+
+      // Comment toggle
+      feed.querySelectorAll('.comment-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          toggleComments(btn.dataset.id, true);
+        });
+      });
+
+      // Save
+      feed.querySelectorAll('.save-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var id    = btn.dataset.id;
+          var store = loadStore();
+          var pd    = postData(store, id);
+          pd.saved = !pd.saved;
+          saveStore(store);
+
+          btn.classList.toggle('saved', pd.saved);
+          btn.innerHTML = iconSave(pd.saved) + '<span>' + (pd.saved ? 'Saved' : 'Save') + '</span>';
+        });
+      });
+
+      // Copy prompt
+      feed.querySelectorAll('.btn-copy').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var text = btn.dataset.prompt;
+          if (!text) return;
+          var done = function() {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(function() {
+              btn.textContent = 'Copy Prompt';
+              btn.classList.remove('copied');
+            }, 2000);
+          };
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(done).catch(fallback);
+          } else { fallback(); }
+          function fallback() {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch(e) {}
+            document.body.removeChild(ta);
+            done();
+          }
+        });
+      });
+
+      // Textarea auto-resize + submit activation
+      feed.querySelectorAll('.comment-input').forEach(function(ta) {
+        var wrap   = ta.closest('.comment-field-wrap');
+        var submit = wrap.querySelector('.comment-submit');
+
+        ta.addEventListener('input', function() {
+          ta.style.height = 'auto';
+          ta.style.height = ta.scrollHeight + 'px';
+          submit.classList.toggle('active', ta.value.trim().length > 0);
+        });
+
+        ta.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            doSubmitComment(ta.dataset.id, ta, submit);
+          }
+        });
+      });
+
+      // Submit button
+      feed.querySelectorAll('.comment-submit').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var wrap = btn.closest('.comment-field-wrap');
+          var ta   = wrap.querySelector('.comment-input');
+          if (ta) doSubmitComment(ta.dataset.id, ta, btn);
+        });
+      });
+    }
+
+    // ── Toggle comment section open/closed ───────────────────────────────────
+
+    function toggleComments(id, focusInput) {
+      var section = document.querySelector('.comment-section[data-id="' + id + '"]');
+      if (!section) return;
+      var opening = !section.classList.contains('open');
+      section.classList.toggle('open', opening);
+      if (opening && focusInput) {
+        var ta = section.querySelector('.comment-input');
+        if (ta) setTimeout(function() { ta.focus(); }, 40);
+      }
+    }
+
+    // ── Submit a comment ─────────────────────────────────────────────────────
+
+    function doSubmitComment(id, ta, submitBtn) {
+      var text = ta.value.trim();
+      if (!text) return;
+
+      var store = loadStore();
+      var pd    = postData(store, id);
+      if (!Array.isArray(pd.comments)) pd.comments = [];
+      pd.comments.push({ name: 'You', text: text, ts: new Date().toISOString() });
+      saveStore(store);
+
+      // Refresh comments list inside section
+      var section = document.querySelector('.comment-section[data-id="' + id + '"]');
+      if (section) {
+        var existingList = section.querySelector('.comments-list');
+        var newListHTML  = renderComments(pd.comments);
+        if (existingList) {
+          existingList.outerHTML = newListHTML;
+        } else {
+          section.insertAdjacentHTML('afterbegin', newListHTML);
+        }
+      }
+
+      ta.value = '';
+      ta.style.height = 'auto';
+      if (submitBtn) submitBtn.classList.remove('active');
+
+      refreshReactionRow(id, store);
+    }
+
+    // ── Refresh reaction summary row ─────────────────────────────────────────
+
+    function refreshReactionRow(id, store) {
+      var pd  = postData(store, id);
+      var row = document.querySelector('.reaction-summary[data-id="' + id + '"]');
+      if (!row) return;
+
+      var likeCount    = pd.likeCount || 0;
+      var commentCount = pd.comments ? pd.comments.length : 0;
+      var hasAny       = likeCount > 0 || commentCount > 0;
+
+      row.style.display = hasAny ? 'flex' : 'none';
+      row.innerHTML =
+        '<div class="like-pill">' +
+          (likeCount > 0 ? '<span class="like-dot">&#128077;</span><span>' + likeCount + '</span>' : '') +
+        '</div>' +
+        (commentCount > 0 ? '<span class="comment-count-link" data-id="' + esc(id) + '">' + commentCount + ' comment' + (commentCount !== 1 ? 's' : '') + '</span>' : '');
+
+      // Re-attach comment count click
+      var link = row.querySelector('.comment-count-link');
+      if (link) {
+        link.addEventListener('click', function() { toggleComments(id, true); });
+      }
+    }
+
+    // ── Fetch and boot ────────────────────────────────────────────────────────
 
     async function loadFeed() {
-      const feed = document.getElementById('feed');
-
+      var feed = document.getElementById('feed');
       try {
-        // Cache-busting param so GitHub Pages always serves the latest JSON
-        const res = await fetch('posts.json?v=' + Date.now());
-
-        if (!res.ok) {
-          throw new Error('HTTP ' + res.status);
-        }
-
-        const posts = await res.json();
+        var res = await fetch('posts.json?v=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        var posts = await res.json();
         renderFeed(posts);
-
-      } catch (err) {
-        feed.innerHTML = `
-          <div class="feed-state">
-            <p>Could not load the feed. Make sure posts.json is in the same folder as this page.</p>
-          </div>
-        `;
+      } catch(err) {
+        feed.innerHTML = '<div class="feed-state"><p>Could not load the feed. Make sure posts.json is in the same folder as this page.</p></div>';
         console.error('Feed load error:', err);
       }
     }
 
-    // Boot
     loadFeed();
   </script>
 </body>
