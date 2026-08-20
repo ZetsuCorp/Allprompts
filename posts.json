@@ -1,18 +1,29 @@
 [
   {
+    "id": 6,
+    "type": "PROMPT DROP",
+    "topic": "image generation",
+    "headline": "NEW PROMPT DROP: MASTER IMAGE GENERATION IN SECONDS",
+    "prompt": "Create a hyper-realistic [subject] in a [style] aesthetic. Lighting: [golden hour/neon/studio]. Mood: [cinematic/editorial/raw]. Camera: [35mm/85mm/wide-angle]. Details: ultra-sharp, 8K resolution, no blur. Output: a single striking image that stops the scroll.",
+    "body": "Level up your image generation game — copy, paste, and watch the results fly.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-19T22:14:00Z"
+  },
+  {
     "id": 5,
     "type": "CHALLENGE",
     "headline": "THE 30-MINUTE AI CONTENT SYSTEM CHALLENGE",
     "prompt": "You are a productivity strategist for solo creators. Build me a complete 30-minute daily content system using AI. Break it into exactly 3 phases:\n\nPhase 1 — Ideation (5 minutes): Give me the exact prompt I paste into ChatGPT every morning to generate 10 content ideas. The prompt must pull from my niche, my audience's top 3 pain points, and my core offer. Write it in full with [NICHE], [PAIN POINTS], and [OFFER] as fill-in fields.\n\nPhase 2 — Creation (20 minutes): Give me a single mega-prompt that takes one idea and turns it into a complete piece of content: a scroll-stopping hook (under 8 words), a 3-paragraph body that delivers real value, and a CTA that drives action without sounding pushy. The mega-prompt must include fill-in fields for [IDEA], [AUDIENCE], [PLATFORM], and [GOAL].\n\nPhase 3 — Repurpose (5 minutes): Give me one prompt that takes my finished content piece and instantly spins it into: (a) a 30-second short-form video script, (b) a punchy email subject line with a 2-sentence preview, and (c) a 5-tweet Twitter/X thread opener sequence. Write this prompt in full with a [CONTENT] fill-in field.\n\nDeliver all three prompts as complete, copy-paste-ready text. No summaries. No explanations. Just the prompts.",
     "body": "Run this challenge once and you have a repeatable daily content machine: 30 minutes, zero creative blocks, three formats done.",
-    "footer": "Zetsumetsu EOe\u2122 | Zetsu EDU\u2122 | Zetsu R&D LLC CAGE:20UB7 | \u00a9 2024 - 2026 Zetsumetsu Corporation\u2122 | Artworqq Kevin Suber",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
     "timestamp": "2026-08-20T02:00:00Z",
     "link": "https://allpromptshome.ploy.build/"
   },
   {
     "id": 4,
     "type": "WEEKLY BLOG",
-    "headline": "WHAT IS ALL PROMPTS \u2014 AND WHY CREATORS ARE PAYING $25/MONTH FOR IT",
+    "headline": "WHAT IS ALL PROMPTS — AND WHY CREATORS ARE PAYING $25/MONTH FOR IT",
     "prompt": "You're grinding. You're trying to figure out how to use AI to actually make money, not just play with it. But every time you open ChatGPT, you're staring at a blank box wondering what to type. Sound familiar?\n\nThat's exactly why All Prompts exists.\n\nAll Prompts is a constantly updated library of money-making AI prompts built specifically for creators who want to turn AI into income. Not tutorials. Not theory. Actual prompts you can copy, paste into your AI tool, and use to build something worth selling or posting today.\n\nHere's what's inside:\n\n200+ business idea guides. Not vague inspiration — real, specific ideas with the prompts to execute them. Whether you want to launch a digital product, grow a content channel, or build a side hustle, there's a guide for it.\n\nPrompt of the Week. Every week, a fresh prompt lands in the feed. Hand-picked, tested, and built to produce something you can actually use. Content, offers, hooks, art series — the kind of output that moves.\n\nCreator Challenges. Short, structured challenges that push you to actually ship something. The best way to learn AI is to use it under a little pressure. These challenges make it happen.\n\nContent Systems. Not one-off prompts — full systems for creators who want consistency. Instagram content, email sequences, offer copy, lead magnets. Build once, use forever.\n\nThe workflow is brutally simple. You open All Prompts. You find a prompt that fits what you're building. You copy it, paste it into ChatGPT or whatever AI tool you use, and you get a result you can sell, post, or ship. No learning curve. No wasted time figuring out what to ask.\n\nThis is $25 a month. That's less than a single freelance post. Less than one hour of consulting. Less than the course you bought six months ago and never finished.\n\nIf you make one sale from a prompt you found here, it pays for itself. If you post one piece of content that lands, it pays for itself. Most members do both in the first week.\n\nAll Prompts isn't for people who want to watch others succeed with AI. It's for the creators who are ready to be the ones doing the work.\n\nJoin at https://allpromptshome.ploy.build/",
     "body": "This week's deep dive into All Prompts — what it is, who it's for, and why it works.",
     "timestamp": "2026-08-19T21:42:00",
@@ -39,7 +50,7 @@
   {
     "id": 1,
     "type": "PROMPT DROP",
-    "headline": "LIVING CARVINGS \u2014 ART SERIES GENERATOR",
+    "headline": "LIVING CARVINGS — ART SERIES GENERATOR",
     "prompt": "Create hyper-realistic fine art portraits of intricately carved creatures actively shaping their own material into a larger surface, debris flying with every strike. Four distinct species, each with a unique material, emotion, and workshop setting. Perfect for collectors who love ornate nature-inspired fine art.",
     "body": "Drop this into Midjourney or DALL-E. Four unique collector-grade images from one prompt. Sell the series or use it to grow your art page.",
     "timestamp": "2026-08-19T17:00:00",
