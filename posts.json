@@ -1,5 +1,16 @@
 [
   {
+    "id": 56,
+    "type": "CHALLENGE",
+    "topic": "social media",
+    "headline": "WEEKLY CHALLENGE: PUSH YOUR SOCIAL MEDIA FURTHER",
+    "prompt": "CHALLENGE: Write a social post about [your expertise] that uses zero industry jargon. If a 16-year-old wouldn't understand every word, rewrite it. Then post it. The creators who talk plainly always out-earn the ones who sound smart.",
+    "body": "Take the social media challenge — use this prompt and share what you create.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-22T04:07:00Z"
+  },
+  {
     "id": 55,
     "type": "CREATOR WIN",
     "topic": "marketing copy",
