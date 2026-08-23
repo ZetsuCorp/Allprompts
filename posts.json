@@ -1,5 +1,16 @@
 [
   {
+    "id": 96,
+    "type": "PROMPT DROP",
+    "topic": "social media",
+    "headline": "NEW PROMPT DROP: MASTER SOCIAL MEDIA IN SECONDS",
+    "prompt": "Write a [Instagram/TikTok/LinkedIn] post about [topic] that stops the scroll in the first line. Format: hook → story → insight → CTA. Use short paragraphs, white space, and one power emoji per section. Tone: [bold/conversational/expert]. End with a question that drives comments.",
+    "body": "Level up your social media game — copy, paste, and watch the results fly.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-23T20:01:00Z"
+  },
+  {
     "id": 95,
     "type": "CHALLENGE",
     "topic": "marketing copy",
