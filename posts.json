@@ -1,5 +1,16 @@
 [
   {
+    "id": 86,
+    "type": "CHALLENGE",
+    "topic": "image generation",
+    "headline": "WEEKLY CHALLENGE: PUSH YOUR IMAGE GENERATION FURTHER",
+    "prompt": "CHALLENGE: Generate 3 variations of [subject] — one hyper-realistic, one illustrated, one abstract. Keep the same core subject and mood across all three. Compare: which variation creates the strongest emotional response? Use this as a style test for your next project.",
+    "body": "Take the image generation challenge — use this prompt and share what you create.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-23T11:09:00Z"
+  },
+  {
     "id": 85,
     "type": "CREATOR WIN",
     "topic": "image generation",
