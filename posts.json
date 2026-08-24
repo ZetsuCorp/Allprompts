@@ -1,5 +1,16 @@
 [
   {
+    "id": 112,
+    "type": "WEEKLY BLOG",
+    "topic": "topic deep dive",
+    "headline": "THE DEEP DIVE: MASTERING AI PROMPTS FOR YOUR BUSINESS",
+    "prompt": "",
+    "body": "AI prompts are not magic words. They are instructions — and like any instruction, the quality of the output depends on the quality of the input. Here is a clear breakdown of what separates a prompt that works from one that does not.\n\nEvery prompt has a structure. At the most basic level, that structure is: context, task, format. Context tells the AI who is speaking and what situation they are in. Task tells the AI what to produce. Format tells the AI exactly how to present the output. Prompts that skip any one of these three produce output that requires heavy editing — if it is usable at all.\n\nContext is where most creators underinvest. \"Write a product description\" produces a generic result. \"Write a product description for a digital prompt library aimed at online creators who sell digital products and services, using a confident and direct tone, no jargon\" produces something you can actually post. The context is not extra information — it is the specification the AI needs to calibrate its output.\n\nTask precision matters more than length. A short, precise task instruction outperforms a long, vague one every time. \"List 5 cold email subject lines, each under 8 words, optimized for open rate\" is better than a paragraph describing what you want. Precision creates constraint. Constraint creates output.\n\nFormat is the most underused lever in prompt writing. Specifying the exact format — number of items, word count, structure, headers, bullet points, or a specific document shape — cuts editing time dramatically. The AI produces what you asked for instead of what it guesses you want.\n\nAll Prompts is built on this structure. Every prompt in the library gives the AI the context, task, and format it needs to produce usable output immediately. Browse the full library at allpromptshome.ploy.build and see the structure in action across every category.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-24T13:03:00Z"
+  },
+  {
     "id": 111,
     "type": "PROMPT DROP",
     "topic": "marketing copy",
