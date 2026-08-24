@@ -1,5 +1,16 @@
 [
   {
+    "id": 119,
+    "type": "CHALLENGE",
+    "topic": "marketing copy",
+    "headline": "WEEKLY CHALLENGE: PUSH YOUR MARKETING COPY FURTHER",
+    "prompt": "CHALLENGE: Write the same product pitch 3 ways — for a skeptic, for an early adopter, and for someone who has never heard of this category. [Product: describe yours here]. Which version converts best depends on your audience. Test all three this week.",
+    "body": "Take the marketing copy challenge — use this prompt and share what you create.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-24T19:00:00Z"
+  },
+  {
     "id": 118,
     "type": "CREATOR WIN",
     "topic": "image generation",
