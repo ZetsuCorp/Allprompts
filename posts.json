@@ -1,5 +1,16 @@
 [
   {
+    "id": 159,
+    "type": "PROMPT DROP",
+    "topic": "marketing copy",
+    "headline": "NEW PROMPT DROP: MASTER MARKETING COPY IN SECONDS",
+    "prompt": "Write a high-converting [platform] ad for [product/service]. Hook: start with the boldest benefit. Body: 3 punchy lines that hit the pain point, then the solution. CTA: one urgent, action-first line. Tone: [confident/playful/urgent]. Length: under 150 words.",
+    "body": "Level up your marketing copy game — copy, paste, and watch the results fly.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-26T11:03:57Z"
+  },
+  {
     "id": 158,
     "type": "CHALLENGE",
     "topic": "image generation",
