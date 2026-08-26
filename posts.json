@@ -1,5 +1,16 @@
 [
   {
+    "id": 153,
+    "type": "PROMPT DROP",
+    "topic": "image generation",
+    "headline": "NEW PROMPT DROP: MASTER IMAGE GENERATION IN SECONDS",
+    "prompt": "Create a hyper-realistic [subject] in a [style] aesthetic. Lighting: [golden hour/neon/studio]. Mood: [cinematic/editorial/raw]. Camera: [35mm/85mm/wide-angle]. Details: ultra-sharp, 8K resolution, no blur. Output: a single striking image that stops the scroll.",
+    "body": "Level up your image generation game — copy, paste, and watch the results fly.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-26T06:03:00Z"
+  },
+  {
     "id": 152,
     "type": "CHALLENGE",
     "topic": "productivity",
