@@ -1,5 +1,16 @@
 [
   {
+    "id": 200,
+    "type": "CHALLENGE",
+    "topic": "productivity",
+    "headline": "WEEKLY CHALLENGE: PUSH YOUR PRODUCTIVITY FURTHER",
+    "prompt": "CHALLENGE: Find 2 hours in your next 7 days that are currently wasted. Use this prompt with your calendar: [describe your typical week]. Identify the lowest-value recurring time blocks and replace them with one high-leverage activity you've been avoiding.",
+    "body": "Take the productivity challenge — use this prompt and share what you create.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-28T05:02:00Z"
+  },
+  {
     "id": 199,
     "type": "CREATOR WIN",
     "topic": "marketing copy",
