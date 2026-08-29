@@ -1,5 +1,16 @@
 [
   {
+    "id": 228,
+    "type": "PROMPT DROP",
+    "topic": "sales",
+    "headline": "NEW PROMPT DROP: MASTER SALES IN SECONDS",
+    "prompt": "Write a cold outreach message for [product/service] targeting [audience]. Open with a specific observation about their business. Pitch: one sentence on the transformation you deliver. Proof: one concrete result. CTA: low-commitment next step. Under 100 words. No jargon.",
+    "body": "Level up your sales game — copy, paste, and watch the results fly.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-29T09:00:00Z"
+  },
+  {
     "id": 227,
     "type": "CHALLENGE",
     "topic": "business ideas",
