@@ -1,5 +1,16 @@
 [
   {
+    "id": 221,
+    "type": "CHALLENGE",
+    "topic": "content creation",
+    "headline": "WEEKLY CHALLENGE: PUSH YOUR CONTENT CREATION FURTHER",
+    "prompt": "CHALLENGE: Document one hour of your actual work process today as content. Use this prompt to turn your raw notes into a post: [paste your process notes]. The most relatable content is just honest documentation. No filters, no polish. Just real work.",
+    "body": "Take the content creation challenge — use this prompt and share what you create.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-29T01:00:00Z"
+  },
+  {
     "id": 220,
     "type": "CREATOR WIN",
     "topic": "sales",
