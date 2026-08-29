@@ -1,5 +1,16 @@
 [
   {
+    "id": 240,
+    "type": "PROMPT DROP",
+    "topic": "productivity",
+    "headline": "NEW PROMPT DROP: MASTER PRODUCTIVITY IN SECONDS",
+    "prompt": "Design a daily workflow for a [role] who wants to [goal]. Include: morning startup routine (15 min), deep work blocks (90 min each), communication windows, and shutdown ritual. Remove every task that doesn't directly move revenue or the top priority. Output: a clear hour-by-hour schedule.",
+    "body": "Level up your productivity game — copy, paste, and watch the results fly.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-29T20:01:00Z"
+  },
+  {
     "id": 239,
     "type": "CHALLENGE",
     "topic": "marketing copy",
