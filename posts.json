@@ -1,5 +1,16 @@
 [
   {
+    "id": 251,
+    "type": "CHALLENGE",
+    "topic": "business ideas",
+    "headline": "WEEKLY CHALLENGE: PUSH YOUR BUSINESS IDEAS FURTHER",
+    "prompt": "CHALLENGE: Productize your most-asked-for advice into a digital offer in 24 hours. Use this prompt to draft it — describe your expertise: [your expertise]. Output: product name, one-line description, price point, delivery method, and the first 3 people you'd offer it to.",
+    "body": "Take the business ideas challenge — use this prompt and share what you create.",
+    "footer": "Zetsumetsu EOe™ | Zetsu EDU™ | Zetsu R&D LLC CAGE:20UB7 | © 2024 - 2026 Zetsumetsu Corporation™ | Artworqq Kevin Suber",
+    "link": "https://allpromptshome.ploy.build/",
+    "timestamp": "2026-08-30T07:01:00Z"
+  },
+  {
     "id": 250,
     "type": "CREATOR WIN",
     "topic": "social media",
